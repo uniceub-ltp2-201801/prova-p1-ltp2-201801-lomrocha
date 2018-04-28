@@ -45,4 +45,27 @@ public class DisciplinaDAO {
 
 		return resultado;
 	}
+	
+	public void incluirDisciplina(int idProfessor, String nome, String curso, int cargaHoraria) {
+		PreparedStatement ps = null;
+		
+		try {
+			String query = "INSERT INTO `faculdade`.`disciplina` (`idprofessor`, `nome`, `curso`, `cargahoraria`)\r\n"
+					     + "VALUES(?, '?', '?', ?)";
+			
+			ps = conexao.prepareStatement(query);
+			
+			ps.setInt(1, idProfessor);
+			ps.setString(2, nome);
+			ps.setString(3, curso);
+			ps.setInt(4, cargaHoraria);
+			
+			ps.executeUpdate();
+
+
+			ps.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 }

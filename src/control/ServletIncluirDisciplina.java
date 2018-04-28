@@ -18,16 +18,16 @@ import model.Disciplina;
 import model.Professor;
 
 /**
- * Servlet implementation class ServletExibirProfessor
+ * Servlet implementation class ServletIncluirDisciplina
  */
-@WebServlet("/exibirProfessor")
-public class ServletExibirProfessor extends HttpServlet {
+@WebServlet("/incluirDisciplina")
+public class ServletIncluirDisciplina extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletExibirProfessor() {
+    public ServletIncluirDisciplina() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,8 +36,10 @@ public class ServletExibirProfessor extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		int idProfessor = Integer.parseInt(request.getParameter("idprofessor"));
+		String nome = request.getParameter("nome");
+		String curso = request.getParameter("curso");
+		int cargaHoraria = Integer.parseInt(request.getParameter("cargahoraria"));
 		
 		Connection conexao = Conexao.getConexao();
 		
@@ -45,11 +47,13 @@ public class ServletExibirProfessor extends HttpServlet {
 		DisciplinaDAO dd = new DisciplinaDAO(conexao);
 		
 		Professor professor = pd.getProfessorer(idProfessor);
+		
+		dd.incluirDisciplina(idProfessor, nome, curso, cargaHoraria);		
 		ArrayList<Disciplina> disciplinas = dd.getDisciplinas(idProfessor);
 		
 		request.setAttribute("professor",  professor);
 		request.setAttribute("disciplinas", disciplinas);
-		request.setAttribute("sucesso", false);
+		request.setAttribute("sucesso", true);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("exibirProfessor.jsp");
 

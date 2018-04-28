@@ -24,7 +24,7 @@
 		%>
 		<tr>
 			<td><%=professor.getNome()%></td>
-			<td><a href="http://localhost:8080/Banco/exibirProfessor?idprofessor=<%=professor.getIdProfessor()%>">Mais detalhes</a></td>
+			<td><a href="http://localhost:8080/Prova1/exibirProfessor?idprofessor=<%=professor.getIdProfessor()%>">Mais detalhes</a></td>
 		</tr>
 		<%
 			}
